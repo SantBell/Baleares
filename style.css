@@ -1,0 +1,941 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+}
+
+:root {
+    --celeste: #a2d2ff;
+    --rosa: #ffafcc;
+    --amarillo: #ffea00;
+    --texto: #444;
+}
+
+body {
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+header {
+    background: white;
+    padding: 1rem 5%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+section {
+    scroll-margin-top: 60px; /* Esto hace que al saltar a una sección, deje espacio para el header */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    margin-left: 20px;
+    color: var(--texto);
+    font-weight: bold;
+}
+
+
+/* Estilos para  el inicio */
+/* --- HERO CON VIDEO Y CARRUSEL --- */
+.hero-video {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* Contenedor del Video */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que el video cubra todo sin deformarse */
+}
+
+/* Capa oscura para mejorar legibilidad del texto */
+.capa-oscura {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Negro con 40% de opacidad */
+    z-index: -1;
+}
+
+/* Contenedor del contenido (Texto + Carrusel) */
+.contenido-hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+    z-index: 1;
+    gap: 30px;
+}
+
+.texto-hero {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+}
+
+.texto-hero h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.texto-hero .eslogan {
+    font-size: 1.5rem;
+    color: #f0f0f0;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+/* Estilos del Mini Carrusel */
+.mini-carrusel {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 5px solid rgba(255,255,255,0.2);
+}
+
+.carrusel-fotos {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Ajusta la altura según tus fotos */
+}
+
+.foto-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* Transición suave */
+}
+
+.foto-item.active {
+    opacity: 1;
+}
+
+/* Indicadores (Dots) */
+.indicadores {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: var(--rosa);
+}
+
+/* Adaptación para móviles */
+@media (max-width: 768px) {
+    .contenido-hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 80px;
+    }
+    .texto-hero {
+        text-align: center;
+    }
+    .texto-hero h1 { font-size: 2.5rem; }
+    .mini-carrusel { max-width: 100%; height: 250px; }
+    .carrusel-fotos { height: 250px; }
+}
+
+/* Estilos para Nosotros */
+#nosotros {
+    padding: 60px 5%;
+    background-color: #fffaf0; /* Un tono crema muy suave */
+    text-align: center;
+}
+
+.mision-vision {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.bloque {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.bloque h3 {
+    color: var(--celeste);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.valores {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.valores span {
+    background: var(--rosa);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(255, 175, 204, 0.4);
+}
+
+/* Estilos para los servicio */
+#servicios {
+    padding: 60px 5%;
+    background-color: #fff;
+}
+
+#servicios h2{
+    text-align: center;
+}
+
+#faq h2{
+    text-align: center;
+}
+
+.grid-servicios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 50px 5%;
+}
+
+.card {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+    border-bottom: 5px solid var(--celeste);
+}
+
+.card:hover { transform: translateY(-10px); }
+
+/* Estilos para la Galería */
+#galeria {
+    padding: 60px 5%;
+    background-color: #fff;
+}
+
+#galeria h2{
+    text-align: center;
+}
+
+.contenedor-galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.foto img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.foto img:hover {
+    transform: scale(1.05);
+}
+
+/* Estilos para las Actividades */
+#actividades {
+    padding: 50px 5%;
+    background-color: #f0f9ff;
+    text-align: center;
+}
+
+.tabla-calendario {
+    overflow-x: auto; /* Para que sea responsivo en celulares */
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+th {
+    background-color: var(--celeste);
+    color: white;
+    padding: 15px;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background-color: #fff9fb;
+}
+
+/* Estilos para Testimonios */
+#testimonios {
+    padding: 60px 5%;
+    background-color: #f7f7f7;
+    text-align: center;
+    /* Evita que las tarjetas que están "afuera" generen scroll horizontal en la web */
+    overflow: hidden; 
+}
+
+.carrusel-contenedor {
+    position: relative;
+    max-width: 600px; /* Reducimos el ancho para que la tarjeta se vea centrada y estética */
+    margin: 40px auto;
+    overflow: hidden; /* Corta las tarjetas que no están activas */
+    border-radius: 30px;
+}
+
+.carrusel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Suaviza el movimiento */
+    width: 100%;
+}
+
+.testimonio-card {
+    /* Fuerza a que cada tarjeta mida exactamente lo mismo que el contenedor */
+    min-width: 100%; 
+    box-sizing: border-box;
+    padding: 40px;
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 10px rgba(0,0,0,0.05);
+}
+
+.estrellas {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.testimonio-card p {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.testimonio-card h4 {
+    color: var(--celeste);
+}
+
+.carrusel-controles {
+    margin-top: 20px;
+}
+
+.carrusel-controles button {
+    background: var(--rosa);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin: 0 10px;
+    transition: opacity 0.3s;
+}
+
+.carrusel-controles button:hover {
+    opacity: 0.8;
+}
+
+/* Estilos para Preguntas frecuentes */
+#faq {
+    padding: 60px 5%;
+    background-color: #fff;
+}
+
+.acordeon {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 10px;
+    border: 2px solid #f0f0f0;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.faq-pregunta {
+    width: 100%;
+    padding: 20px;
+    background: white;
+    border: none;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--texto);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.faq-pregunta:hover {
+    background-color: #f9f9f9;
+}
+
+.faq-respuesta {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+    background-color: #fafafa;
+}
+
+.faq-respuesta p {
+    padding: 15px 0;
+    color: #666;
+}
+
+/* Clase activa que manejaremos con JS */
+.faq-item.active .faq-respuesta {
+    max-height: 200px; /* Ajusta según el contenido */
+    padding-bottom: 20px;
+}
+
+.faq-item.active .faq-pregunta span {
+    transform: rotate(45deg);
+    color: var(--rosa);
+}
+
+/* Estilos para el Contacto */
+/* #contacto {
+    background: #eee;
+    padding: 50px 5%;
+    text-align: center;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+button {
+    background: var(--rosa);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+} */
+/* #contacto {
+    padding: 80px 5%;
+    background: linear-gradient(135deg, #f0f9ff 0%, #fffaf0 100%);
+}
+
+.contenedor-contacto {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
+    align-items: center;
+}
+
+.texto-contacto h2 {
+    font-size: 2.5rem;
+    color: var(--texto);
+    margin-bottom: 20px;
+}
+
+.iconos-contacto {
+    margin-top: 30px;
+    font-weight: bold;
+    color: #555;
+}
+
+.formulario {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+
+.grupo-input, .grupo-doble {
+    margin-bottom: 15px;
+}
+
+.grupo-doble {
+    display: flex;
+    gap: 10px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #eee;
+    border-radius: 15px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--celeste);
+}
+
+.btn-enviar {
+    width: 100%;
+    background: var(--rosa);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.btn-enviar:hover {
+    background: #ff85ad;
+    transform: translateY(-3px);
+} */
+
+/* Estilos para la ubicación */
+/* #ubicacion {
+    padding: 60px 5%;
+    background-color: #fff;
+}
+
+.contenedor-ubicacion {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.info-mapa {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+}
+
+.info-mapa h2 {
+    color: var(--texto);
+    margin-bottom: 20px;
+}
+
+.detalles {
+    margin: 20px 0;
+    line-height: 2;
+}
+
+.mapa-frame {
+    flex: 1.5;
+    min-width: 300px;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.btn-ruta {
+    background-color: var(--celeste);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-ruta:hover {
+    background-color: #8bbceb;
+} */
+#contacto-ubicacion {
+    padding: 80px 5%;
+    background-color: #f0f9ff; /* Azul muy claro */
+}
+
+.contenedor-mixto {
+    display: flex; /* Activa la fila */
+    flex-wrap: wrap; /* Permite que baje en móviles */
+    gap: 40px; /* Espacio entre el mapa y el formulario */
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.contenedor-mixto h2{
+    text-align: center;
+    padding: 10px;
+}
+
+.bloque-info, .bloque-formulario {
+    flex: 1; /* Ambos ocupan el mismo ancho (50% cada uno) */
+    min-width: 320px; /* Evita que se compriman demasiado */
+    background: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Ajustes del Mapa */
+.mapa-recortado {
+    margin-top: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid #eef6ff;
+}
+
+/* Ajustes del Formulario Interno */
+.fila-doble {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.formulario-estilizado input, 
+.formulario-estilizado textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.btn-enviar {
+    width: 100%;
+    background: var(--rosa);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.btn-enviar:hover {
+    transform: translateY(-3px);
+    background: #ff85ad;
+}
+
+/* Responsivo para celulares */
+@media (max-width: 768px) {
+    .contenedor-mixto {
+        flex-direction: column; /* Mapa arriba, Formulario abajo */
+    }
+}
+
+/* Estilos para el pie de pagína */
+.pie-pagina {
+    background-color: #333;
+    color: white;
+    padding: 60px 5% 20px;
+    font-size: 0.9rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: 1px solid #555;
+    padding-bottom: 40px;
+}
+
+.footer-seccion h3 {
+    color: var(--celeste);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.footer-seccion h4 {
+    margin-bottom: 20px;
+    color: var(--rosa);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-seccion p {
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.footer-seccion ul {
+    list-style: none;
+}
+
+.footer-seccion ul li {
+    margin-bottom: 10px;
+}
+
+.footer-seccion ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-seccion ul li a:hover {
+    color: var(--celeste);
+}
+
+.redes-sociales a {
+    display: inline-block;
+    margin-right: 15px;
+    margin-top: 15px;
+    color: white;
+    background: #555;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: background 0.3s;
+}
+
+.redes-sociales a:hover {
+    background: var(--rosa);
+}
+
+.footer-inferior {
+    text-align: center;
+    padding-top: 20px;
+    color: #888;
+}
+
+.footer-inferior a {
+    color: #888;
+    text-decoration: none;
+}
+
+.footer-inferior a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para boton  whattsapp */
+
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+}
+
+/* Tooltip (Mensaje pequeño al lado) */
+.tooltip-whatsapp {
+    position: absolute;
+    right: 75px;
+    background-color: #333;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}
+
+.whatsapp-float:hover .tooltip-whatsapp {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Adaptación para móviles whattsapp*/
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+    .tooltip-whatsapp {
+        display: none; /* Ocultar el texto en móviles para no tapar contenido */
+    }
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem; /* Título más pequeño para que no ocupe toda la pantalla */
+    }
+    
+    .contenedor-contacto, .footer-grid {
+        grid-template-columns: 1fr; /* Una sola columna para evitar scroll horizontal */
+        text-align: center;
+    }
+
+    .tabla-calendario table {
+        font-size: 0.8rem; /* Texto más pequeño en la tabla para celulares */
+    }
+}
+
+/* Estilos para el pop-up */
+/* --- ESTILOS DEL MODAL --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px); /* Desenfoca el fondo de la web */
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 30px;
+    position: relative;
+    text-align: center;
+    animation: aparecer 0.4s ease-out;
+}
+
+@keyframes aparecer {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #888;
+}
+
+.modal-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.modal-body h2 {
+    color: var(--celeste);
+    margin-bottom: 15px;
+}
+
+.modal-body p {
+    color: #555;
+    margin-bottom: 25px;
+}
+
+#formPromo input {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.btn-promo {
+    width: 100%;
+    background: var(--rosa);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.nota-modal {
+    font-size: 0.7rem !important;
+    margin-top: 15px;
+    color: #999 !important;
+}
