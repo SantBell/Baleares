@@ -12,11 +12,16 @@
     <header>
         <nav>
             <div class="logo">🧸 Pequeños Pasos</div>
-            <ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-list">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#galeria">Galeria</a></li>                
+                <li><a href="#galeria">Galeria</a></li>
                 <li><a href="#contacto-ubicacion">Contacto</a></li>
             </ul>
         </nav>
@@ -146,7 +151,7 @@
         </div>
     </section>
 
-    <section id="galeria">
+    <!-- <section id="galeria">
         <h2>Nuestros Espacios</h2>
         <div class="contenedor-galeria">
             <div class="foto"><img src="img/imagen05.png" alt="Sala de juegos" loading="lazy" width="300" height="200"></div>
@@ -154,7 +159,37 @@
             <div class="foto"><img src="img/imagen03.png" alt="Jardín exterior" loading="lazy" width="300" height="200"></div>
             <div class="foto"><img src="img/imagen04.png" alt="Comedor" loading="lazy" width="300" height="200"></div>
         </div>
-    </section>
+    </section> -->
+
+    <section id="galeria">
+    <h2>Nuestros Espacios</h2>
+    <div class="contenedor-galeria">
+        <div class="foto">
+            <img src="img/imagen02.png" 
+                 alt="Niños jugando" 
+                 data-titulo="Sala de Juegos " 
+                 loading="lazy">
+        </div>
+        <div class="foto">
+            <img src="img/imagen03.png" 
+                 alt="Cunas" 
+                 data-titulo="Actividades " 
+                 loading="lazy">
+        </div>
+        <div class="foto">
+            <img src="img/imagen04.png" 
+                 alt="Mesas pequeñas" 
+                 data-titulo="Comedor Saludable 🍎" 
+                 loading="lazy">
+        </div>
+        <div class="foto">
+            <img src="img/imagen05.png" 
+                 alt="Juegos al aire libre" 
+                 data-titulo="Patio de Juegos 🌳" 
+                 loading="lazy">
+        </div>
+    </div>
+</section>
 
     <section id="testimonios">
         <h2>Lo que dicen los padres</h2>
@@ -277,6 +312,14 @@
                 </form>
                 <p class="nota-modal">*Válido para nuevas inscripciones este mes.</p>
             </div>
+        </div>
+    </div>
+
+    <div id="modalGaleria" class="modal-galeria-overlay">
+        <span class="cerrar-galeria">&times;</span>
+        <div class="contenedor-imagen-modal">
+            <img src="" alt="" id="imagenModal">
+            <h3 id="tituloImagenModal">Título de la Sala</h3>
         </div>
     </div>
 

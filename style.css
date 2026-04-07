@@ -17,6 +17,93 @@ body {
     line-height: 1.6;
 }
 
+/* --- ESTILOS BASE DEL HEADER BOTÓN HAMBURGUESA--- */
+header {
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 15px 5%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    margin-left: 20px;
+    color: var(--texto);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+/* --- BOTÓN HAMBURGUESA (Oculto por defecto) --- */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--texto);
+    transition: all 0.3s ease;
+}
+
+/* --- MEDIA QUERY PARA MÓVILES BOTÓN HAMBURGUESA --- */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex; /* Aparece el botón */
+    }
+
+    .nav-list {
+        display: none; /* Ocultamos la lista horizontal */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%; /* Justo debajo del header */
+        left: 0;
+        background-color: white;
+        text-align: center;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Clase que activaremos con JS */
+    .nav-list.active {
+        display: flex;
+    }
+
+    .nav-list li {
+        margin: 10px 0;
+    }
+
+    .nav-list li:hover{
+        background-color:var(--celeste)
+    }
+
+    .nav-list li a {
+        margin-left: 0;
+        font-size: 1.2rem;
+    }
+
+    /* Animación del botón (X) al abrirse */
+    .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
+
 header {
     background: white;
     padding: 1rem 5%;
@@ -298,6 +385,89 @@ nav ul li a {
     transform: scale(1.05);
 }
 
+/* --- ESTILOS DEL MODAL DE GALERÍA (LIGHTBOX) --- */
+.modal-galeria-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Fondo muy oscuro */
+    backdrop-filter: blur(8px); /* Desenfoca suavemente la web de fondo */
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    z-index: 3000; /* Por encima de todo, incluso del header */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Clase para mostrar el modal con animación */
+.modal-galeria-overlay.mostrar {
+    display: flex;
+    opacity: 1;
+}
+
+.contenedor-imagen-modal {
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    text-align: center;
+    animation: zoomIn 0.3s ease; /* Efecto de zoom al abrir */
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+#imagenModal {
+    max-width: 100%;
+    max-height: 70vh; /* Altura máxima para dejar espacio al título */
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    border: 5px solid white;
+}
+
+#tituloImagenModal {
+    color: white;
+    margin-top: 20px;
+    font-size: 1.8rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-family: 'Quicksand', sans-serif;
+}
+
+.cerrar-galeria {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 3100;
+}
+
+.cerrar-galeria:hover {
+    color: var(--rosa); /* Cambia al color rosa al pasar el mouse */
+}
+
+/* Adaptación para móviles DEL MODAL DE GALERÍA (LIGHTBOX) */
+@media (max-width: 768px) {
+    .contenedor-imagen-modal {
+        max-width: 95%;
+    }
+    #tituloImagenModal {
+        font-size: 1.3rem;
+    }
+    .cerrar-galeria {
+        top: 15px;
+        right: 20px;
+        font-size: 40px;
+    }
+}
+
 /* Estilos para las Actividades */
 #actividades {
     padding: 50px 5%;
@@ -467,161 +637,6 @@ tr:hover {
 }
 
 /* Estilos para el Contacto */
-/* #contacto {
-    background: #eee;
-    padding: 50px 5%;
-    text-align: center;
-}
-
-form {
-    max-width: 500px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-
-input, textarea {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
-
-button {
-    background: var(--rosa);
-    border: none;
-    padding: 10px 25px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-} */
-/* #contacto {
-    padding: 80px 5%;
-    background: linear-gradient(135deg, #f0f9ff 0%, #fffaf0 100%);
-}
-
-.contenedor-contacto {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 50px;
-    align-items: center;
-}
-
-.texto-contacto h2 {
-    font-size: 2.5rem;
-    color: var(--texto);
-    margin-bottom: 20px;
-}
-
-.iconos-contacto {
-    margin-top: 30px;
-    font-weight: bold;
-    color: #555;
-}
-
-.formulario {
-    background: white;
-    padding: 40px;
-    border-radius: 30px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-}
-
-.grupo-input, .grupo-doble {
-    margin-bottom: 15px;
-}
-
-.grupo-doble {
-    display: flex;
-    gap: 10px;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #eee;
-    border-radius: 15px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-input:focus, textarea:focus {
-    outline: none;
-    border-color: var(--celeste);
-}
-
-.btn-enviar {
-    width: 100%;
-    background: var(--rosa);
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 15px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
-}
-
-.btn-enviar:hover {
-    background: #ff85ad;
-    transform: translateY(-3px);
-} */
-
-/* Estilos para la ubicación */
-/* #ubicacion {
-    padding: 60px 5%;
-    background-color: #fff;
-}
-
-.contenedor-ubicacion {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 40px;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.info-mapa {
-    flex: 1;
-    min-width: 300px;
-    text-align: left;
-}
-
-.info-mapa h2 {
-    color: var(--texto);
-    margin-bottom: 20px;
-}
-
-.detalles {
-    margin: 20px 0;
-    line-height: 2;
-}
-
-.mapa-frame {
-    flex: 1.5;
-    min-width: 300px;
-    border-radius: 25px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.btn-ruta {
-    background-color: var(--celeste);
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn-ruta:hover {
-    background-color: #8bbceb;
-} */
 #contacto-ubicacion {
     padding: 80px 5%;
     background-color: #f0f9ff; /* Azul muy claro */

@@ -33,12 +33,57 @@ function cambiarFoto() {
 setInterval(cambiarFoto, 3000);
 
 //Para la Galería
-const imagenes = document.querySelectorAll('.foto img');
+// Lógica para el Modal de Galería (Lightbox)
+const modalGaleria = document.getElementById('modalGaleria');
+const imagenModal = document.getElementById('imagenModal');
+const tituloModal = document.getElementById('tituloImagenModal');
+const btnCerrarGaleria = document.querySelector('.cerrar-galeria');
 
-imagenes.forEach(img => {
-    img.addEventListener('click', () => {
-        alert("Aquí podrías abrir una ventana modal con la foto: " + img.alt);
+// Seleccionamos todas las imágenes dentro de la clase .contenedor-galeria
+const imagenesGaleria = document.querySelectorAll('.contenedor-galeria .foto img');
+
+// Añadir evento clic a cada imagen
+imagenesGaleria.forEach(img => {
+    img.addEventListener('click', function() {
+        // 1. Obtener los datos de la imagen clicada
+        const rutaImagen = this.getAttribute('src');
+        const tituloImagen = this.getAttribute('data-titulo'); // Obtenemos el título del data-attribute
+
+        // 2. Colocar los datos en el modal
+        imagenModal.setAttribute('src', rutaImagen);
+        imagenModal.setAttribute('alt', this.getAttribute('alt')); // Copiamos el alt por accesibilidad
+        tituloModal.innerText = tituloImagen; // Ponemos el título correspondiente
+
+        // 3. Mostrar el modal con la clase CSS
+        modalGaleria.classList.add('mostrar');
+        // Bloquear el scroll de la página de fondo
+        document.body.style.overflow = 'hidden'; 
     });
+});
+
+// Función para cerrar el modal
+function cerrarModalGaleria() {
+    modalGaleria.classList.remove('mostrar');
+    // Reactivar el scroll de la página
+    document.body.style.overflow = ''; 
+}
+
+// Cerrar al hacer clic en la X
+btnCerrarGaleria.addEventListener('click', cerrarModalGaleria);
+
+// Cerrar al hacer clic en el fondo oscuro
+modalGaleria.addEventListener('click', function(e) {
+    // Si el clic es en el overlay (fondo), no en la imagen o el título, cerrar.
+    if (e.target === this) {
+        cerrarModalGaleria();
+    }
+});
+
+// Cerrar al presionar la tecla Esc
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modalGaleria.classList.contains('mostrar')) {
+        cerrarModalGaleria();
+    }
 });
 
 //Para los Testimonios
@@ -169,3 +214,21 @@ document.getElementById('formPromo').onsubmit = function(e) {
     modal.style.display = 'none';
     sessionStorage.setItem('promoCerrada', 'true');
 };
+
+//Función para la hamburguesa
+const menu = document.querySelector('#mobile-menu');
+const menuLinks = document.querySelector('.nav-list');
+
+// Función para abrir/cerrar el menú
+menu.addEventListener('click', function() {
+    menu.classList.toggle('is-active'); // Anima las rayitas a una X
+    menuLinks.classList.toggle('active'); // Muestra/Oculta la lista
+});
+
+// Opcional: Cerrar el menú automáticamente al hacer clic en un enlace
+document.querySelectorAll('.nav-list li a').forEach(link => {
+    link.addEventListener('click', () => {
+        menu.classList.remove('is-active');
+        menuLinks.classList.remove('active');
+    });
+});
